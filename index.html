@@ -2,8 +2,15 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="format-detection" content="telephone=no">
 <title>VAULTFALL - 2.5D Kingdom & Pinch Zoom</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;700&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -24,40 +31,40 @@
 
 <div id="topCenter">
   <div id="classBar">
-    <button class="cbtn active" onclick="setClass('Breaker',this)">🔨 Breaker</button>
-    <button class="cbtn" onclick="setClass('Ghost',this)">👻 Ghost</button>
-    <button class="cbtn" onclick="setClass('Guardian',this)">🛡️ Guardian</button>
-    <button class="cbtn" onclick="setClass('Hunter',this)">🎯 Hunter</button>
+    <button type="button" class="cbtn active" onclick="setClass('Breaker',this)">🔨 Breaker</button>
+    <button type="button" class="cbtn" onclick="setClass('Ghost',this)">👻 Ghost</button>
+    <button type="button" class="cbtn" onclick="setClass('Guardian',this)">🛡️ Guardian</button>
+    <button type="button" class="cbtn" onclick="setClass('Hunter',this)">🎯 Hunter</button>
   </div>
   <div id="msg">✌️ দুই আঙুলে জুম করো, রাজ্য সাজাও ও শত্রু রাজ্য লুট করো!</div>
 </div>
 
 <div id="zoomBar">
-  <button class="zbtn" onclick="changeZoom(-0.15)">-</button>
+  <button type="button" class="zbtn" onclick="changeZoom(-0.15)">−</button>
   <span id="zoomLabel">1.0x</span>
-  <button class="zbtn" onclick="changeZoom(0.15)">+</button>
+  <button type="button" class="zbtn" onclick="changeZoom(0.15)">+</button>
 </div>
 
 <div id="killFeed"></div>
 <div id="center"></div>
 
-<button id="hudEditBtn" onclick="toggleHudEdit()">🎛️ HUD EDIT</button>
-<button id="hudResetBtn" onclick="resetHudPositions()">↺ Reset</button>
-<button id="buildToggle" class="hudBtn" onclick="toggleBuildMode()">🏗️ রাজ্য সাজাও</button>
-<button id="startRaidBtn" onclick="startRaidFromEdit()">⚔️ যুদ্ধ শুরু করো</button>
+<button type="button" id="hudEditBtn" class="hudBtn" onclick="toggleHudEdit()">🎛️ HUD EDIT</button>
+<button type="button" id="hudResetBtn" class="hudBtn" onclick="resetHudPositions()">↺ Reset</button>
+<button type="button" id="buildToggle" class="hudBtn" onclick="toggleBuildMode()">🏗️ রাজ্য সাজাও</button>
+<button type="button" id="startRaidBtn" onclick="startRaidFromEdit()">⚔️ যুদ্ধ শুরু করো</button>
 
 <div id="buildDock">
-  <button class="bitem active" onclick="selectBuild('tower',this)">🗼 টাওয়ার<br><span style="color:#ffd700">💰 80</span></button>
-  <button class="bitem" onclick="selectBuild('factory',this)">🏭 ফ্যাক্টরি<br><span style="color:#ffd700">💰 100</span></button>
-  <button class="bitem" onclick="selectBuild('camp',this)">⛺ তাবু/ঘর<br><span style="color:#ffd700">💰 60</span></button>
-  <button class="bitem" onclick="selectBuild('fountain',this)">⛲ বাগান/ঝর্না<br><span style="color:#ffd700">💰 50</span></button>
-  <button class="bitem del" onclick="selectBuild('delete',this)">🗑️ মুছুন<br><span style="color:#ff8a80">ফেরত</span></button>
+  <button type="button" class="bitem active" onclick="selectBuild('tower',this)">🗼 টাওয়ার<br><span style="color:#ffd700">💰 80</span></button>
+  <button type="button" class="bitem" onclick="selectBuild('factory',this)">🏭 ফ্যাক্টরি<br><span style="color:#ffd700">💰 100</span></button>
+  <button type="button" class="bitem" onclick="selectBuild('camp',this)">⛺ তাবু/ঘর<br><span style="color:#ffd700">💰 60</span></button>
+  <button type="button" class="bitem" onclick="selectBuild('fountain',this)">⛲ বাগান/ঝর্না<br><span style="color:#ffd700">💰 50</span></button>
+  <button type="button" class="bitem del" onclick="selectBuild('delete',this)">🗑️ মুছুন<br><span style="color:#ff8a80">ফেরত</span></button>
 </div>
 
 <div id="joy" class="hudBtn"><div id="knob"></div></div>
-<button id="fire" class="hudBtn">🔥 FIRE</button>
-<button id="skill" class="hudBtn">⚡ SKILL</button>
-<button id="jump" class="hudBtn">⬆️</button>
+<button type="button" id="fire" class="hudBtn">🔥 FIRE</button>
+<button type="button" id="skill" class="hudBtn">⚡ SKILL</button>
+<button type="button" id="jump" class="hudBtn">⬆️</button>
 
 <div id="lobby">
   <div style="font-size:40px">🏰</div>
@@ -66,8 +73,8 @@
   <p style="opacity:.9;margin:6px 0;font-size:12px;line-height:1.45">দুই আঙুলে জুম করে নিজের রাজ্য সাজাও → শত্রু রাজ্যের লাল ভল্ট লুট করো → নিজের ভল্টে গোল্ড জমা রাখো!</p>
   <div class="skinRow" id="skinRow"></div>
   <div class="lobbyBtns">
-    <button id="editKingdomBtn" onclick="enterKingdomEditor()">🏗️ আগে আমার রাজ্য সাজাই</button>
-    <button id="play" onclick="startGame(false)">⚔️ সরাসরি যুদ্ধে নামো!</button>
+    <button type="button" id="editKingdomBtn" onclick="enterKingdomEditor()">🏗️ আগে আমার রাজ্য সাজাই</button>
+    <button type="button" id="play" onclick="startGame(false)">⚔️ সরাসরি যুদ্ধে নামো!</button>
   </div>
 </div>
 </div>
@@ -77,5 +84,42 @@
 <script src="js/kingdom.js"></script>
 <script src="js/render.js"></script>
 <script src="js/game.js"></script>
+
+<script>
+/* ---- স্ক্রিপ্ট লোড ফেইল করলে ইউজারকে জানাও ---- */
+(function () {
+  var missing = [];
+  document.querySelectorAll('script[src^="js/"]').forEach(function (s) {
+    if (!s.dataset.ok) missing.push(s.getAttribute('src'));
+  });
+  // ব্রাউজার 404 হলেও error ইভেন্ট দেয়, তাই ধরা যাবে:
+  window.addEventListener('error', function (e) {
+    if (e.target && e.target.tagName === 'SCRIPT') {
+      var msg = document.getElementById('msg');
+      if (msg) {
+        msg.textContent = '⚠️ ফাইল লোড হয়নি: ' + e.target.getAttribute('src');
+        msg.style.color = '#ff8a80';
+      }
+      console.error('Script load failed:', e.target.src);
+    }
+  }, true);
+})();
+
+/* ---- Telegram WebApp নিরাপদে চালু করো ---- */
+(function () {
+  var tg = window.Telegram && window.Telegram.WebApp;
+  if (!tg) { console.warn('Telegram WebApp নেই — সাধারণ ব্রাউজার মোডে চলছে।'); return; }
+  try {
+    tg.ready();
+    tg.expand();
+    if (typeof tg.setHeaderColor === 'function')      tg.setHeaderColor('#0a0a0f');
+    if (typeof tg.setBackgroundColor === 'function')  tg.setBackgroundColor('#0a0a0f');
+    if (typeof tg.disableVerticalSwipes === 'function') tg.disableVerticalSwipes(); // নিচে টান দিলে বন্ধ হবে না
+    if (typeof tg.enableClosingConfirmation === 'function') tg.enableClosingConfirmation();
+  } catch (err) {
+    console.warn('Telegram init error:', err);
+  }
+})();
+</script>
 </body>
 </html>
