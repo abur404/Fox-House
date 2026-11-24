@@ -1,1 +1,61 @@
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;background:#091709;font-family:'Hind Siliguri',sans-serif;touch-action:none;user-select:none}
+#wrap{position:fixed;inset:0;width:100vw;height:100dvh}
+canvas{width:100%;height:100%;display:block}
 
+/* Clean Top HUD */
+#hud{position:absolute;top:6px;left:8px;right:8px;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;z-index:10;pointer-events:none}
+.glass{background:rgba(8,18,12,.72);backdrop-filter:blur(8px);border:1px solid rgba(255,215,0,.3);border-radius:11px;padding:4px 8px;color:#fff}
+#hpBar{width:80px;height:5px;background:rgba(255,255,255,.16);border-radius:20px;overflow:hidden;margin-top:2px}
+#hpFill{height:100%;width:100%;background:linear-gradient(90deg,#00ff88,#00e5ff);transition:width .15s}
+
+/* Compact Class Bar & Message */
+#topCenter{position:absolute;top:48px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px;z-index:15;pointer-events:none;width:95vw;max-width:440px}
+#classBar{display:flex;gap:2px;pointer-events:auto;background:rgba(0,0,0,.58);padding:2px;border-radius:100px;border:1px solid rgba(255,255,255,.14)}
+.cbtn{padding:2px 7px;border-radius:100px;border:none;background:transparent;color:#ddd;font-weight:700;font-size:9.5px;cursor:pointer}
+.cbtn.active{background:linear-gradient(135deg,#ffd700,#ff8f00);color:#000}
+#msg{background:rgba(0,0,0,.64);color:#ffd700;padding:2px 10px;border-radius:100px;font-weight:700;font-size:10px;white-space:nowrap;max-width:95%;overflow:hidden;text-overflow:ellipsis}
+
+/* Minimal Zoom Pill */
+#zoomBar{position:fixed;top:92px;right:8px;display:flex;align-items:center;gap:2px;z-index:30;background:rgba(8,18,12,.72);padding:2px 4px;border-radius:100px;border:1px solid rgba(255,255,255,.18)}
+.zbtn{width:24px;height:24px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;font-weight:900;font-size:11px;cursor:pointer}
+#zoomLabel{color:#ffd700;font-size:9.5px;font-weight:900;padding:0 3px}
+
+#killFeed{position:fixed;top:126px;right:8px;display:flex;flex-direction:column;gap:3px;z-index:12;pointer-events:none;align-items:flex-end}
+.kitem{background:rgba(0,0,0,.68);border-right:2.5px solid #ff3d00;color:#fff;padding:2px 7px;border-radius:6px;font-size:9.5px;font-weight:700}
+#center{position:absolute;top:28%;left:50%;transform:translate(-50%,-50%);font-family:'Outfit';font-size:28px;font-weight:900;color:#fff;text-shadow:0 0 16px #ff9800,0 3px 0 #000;z-index:30;display:none;text-align:center;pointer-events:none}
+
+/* Movable HUD & Controls */
+.hudBtn{position:fixed;z-index:25;touch-action:none}
+.hudBtn.hudEditing{outline:2px dashed #00e5ff;box-shadow:0 0 14px rgba(0,229,255,.9)!important}
+
+#hudEditBtn{position:fixed;top:92px;left:8px;padding:4px 9px;border-radius:100px;background:rgba(10,24,38,.78);color:#00e5ff;font-weight:900;font-size:9.5px;border:1px solid rgba(0,229,255,.6);z-index:35;cursor:pointer}
+#hudEditBtn.active{background:#00e5ff;color:#000}
+#hudResetBtn{position:fixed;top:92px;left:82px;padding:4px 8px;border-radius:100px;background:rgba(45,14,14,.82);color:#ff8a80;font-weight:900;font-size:9.5px;border:1px solid #ff5252;z-index:35;cursor:pointer;display:none}
+
+#buildToggle{bottom:148px;left:14px;padding:6px 11px;border-radius:100px;background:linear-gradient(135deg,#ff9800,#f57c00);color:#000;font-weight:900;font-size:10.5px;border:1.5px solid #fff;cursor:pointer}
+#buildToggle.active{background:linear-gradient(135deg,#00e676,#00c853);color:#000}
+#startRaidBtn{position:fixed;top:122px;left:8px;padding:5px 11px;border-radius:100px;background:linear-gradient(135deg,#ff3d00,#dd2c00);color:#fff;font-weight:900;font-size:9.5px;border:1px solid #ffd700;z-index:35;display:none;cursor:pointer}
+
+/* Builder Dock */
+#buildDock{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);display:none;gap:5px;background:rgba(10,20,14,.92);padding:5px 8px;border-radius:14px;border:1px solid #ffd700;z-index:32;max-width:96vw;overflow-x:auto}
+.bitem{padding:5px 8px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:9.5px;font-weight:700;cursor:pointer;text-align:center;flex-shrink:0}
+.bitem.active{border-color:#ffd700;background:rgba(255,215,0,.22);color:#ffd700}
+.bitem.del.active{border-color:#ff5252;background:rgba(255,82,82,.25);color:#ff8a80}
+
+#joy{bottom:16px;left:14px;width:104px;height:104px;border-radius:50%;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.32)}
+#knob{position:absolute;left:50%;top:50%;width:42px;height:42px;margin:-21px 0 0 -21px;border-radius:50%;background:linear-gradient(135deg,#fff,#cbd5e1);pointer-events:none}
+#fire{bottom:18px;right:16px;width:74px;height:74px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff6b6b,#d32f2f 65%,#8e0000);color:#fff;font-weight:900;font-size:12px;border:2px solid rgba(255,255,255,.8);cursor:pointer}
+#skill{bottom:102px;right:20px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#00ff88,#00b894);color:#000;font-weight:900;font-size:9.5px;border:1.5px solid #fff;cursor:pointer}
+#jump{bottom:26px;right:100px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.7);color:#fff;font-weight:900;cursor:pointer}
+
+/* Lobby */
+#lobby{position:absolute;inset:0;background:radial-gradient(ellipse at top,#1d471d 0%,#091809 65%,#000 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;color:#fff;padding:14px;text-align:center;overflow-y:auto}
+#logo{font-family:'Outfit';font-size:38px;font-weight:900;line-height:.95;background:linear-gradient(180deg,#fff,#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:float 2.5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.lobbyBtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+#play{padding:10px 22px;background:linear-gradient(135deg,#ffd700,#ff8a00);border:none;border-radius:100px;font-size:13.5px;font-weight:900;color:#000;cursor:pointer}
+#editKingdomBtn{padding:10px 18px;background:linear-gradient(135deg,#00e676,#00b0ff);border:none;border-radius:100px;font-size:13.5px;font-weight:900;color:#000;cursor:pointer}
+.skinRow{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+.skin{padding:5px 10px;border-radius:12px;background:rgba(0,0,0,.45);border:2px solid rgba(255,255,255,.15);font-size:11px;font-weight:700;cursor:pointer;color:#fff}
+.skin.active{border-color:#ffd700;background:rgba(255,215,0,.22)}
